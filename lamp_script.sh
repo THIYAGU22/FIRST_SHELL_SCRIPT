@@ -1,4 +1,7 @@
 #!/bin/bash
+
+source credentials.sh
+
 installer()
 {
   echo "is this  installer working?"
@@ -67,6 +70,8 @@ git_clone(){
 	sudo git clone https://github.com/THIYAGU22/php-mysqli-connection.git
 	cd /var/www/html/php-mysqli-connection
 	cp * ../
+	cd ..
+	mysql -h "localhost" -u "$MYSQL_ROOT" -p"$MYSQL_PASS" < "db_table_manipulation.sql"
 }
 
 
@@ -102,8 +107,8 @@ case "$router" in
 	#case 4
     "4") sudo sh ./backup_sql.sh;;
 
-	#case 4
-	"5") echo -e "INVALID OPTIONS"
+     #case 5
+    "5") echo -e "INVALID OPTIONS"
 esac 
 
 git_clone
